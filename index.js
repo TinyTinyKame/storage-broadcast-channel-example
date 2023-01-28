@@ -15,6 +15,7 @@ modalContainer.addEventListener('click', function (ev) {
   ev.stopPropagation();
 });
 modalAddButton.addEventListener('click', addTodo);
+createTodoFromStorage();
 
 function generateRandomId() {
   return (Math.random() + 1).toString(36).substring(7);
@@ -34,14 +35,22 @@ function toggleModal() {
 
 function removeTodo(ev) {
   const target = ev.target;
+  const input = target.nextElementSibling?.firstChild;
+  const todoId = input?.id;
 
+  input.removeEventListener('change', changeTodoState);
+  storageDeleteTodo(todoId);
   target.removeEventListener('click', removeTodo);
   target.parentElement.remove();
 }
 
-function createTodo(todoName) {
-  const id = generateRandomId();
+function changeTodoState(ev) {
+  const target = ev.target;
 
+  storageChangeTodoState(target.id, target.checked);
+}
+
+function createTodo(todoId, todoName, todoState) {
   const todo = document.createElement('div');
   todo.classList.add('todo');
 
@@ -54,10 +63,12 @@ function createTodo(todoName) {
   const container = document.createElement('div');
   const input = document.createElement('input');
   input.type = 'checkbox';
-  input.id = id;
-  input.name = id;
+  input.id = todoId;
+  input.name = todoId;
+  input.checked = todoState === 'done';
+  input.addEventListener('change', changeTodoState);
   const label = document.createElement('label');
-  label.htmlFor = id;
+  label.htmlFor = todoId;
   label.innerHTML = todoName;
 
   todo.appendChild(deleteButton);
@@ -68,10 +79,20 @@ function createTodo(todoName) {
   todoList.appendChild(todo);
 }
 
+function createTodoFromStorage() {
+  const todos = storageGetTodos();
+
+  for (const todo of todos) {
+    createTodo(todo.id, todo.name, todo.state);
+  }
+}
+
 function addTodo() {
   const todoName = newTodoInput.value;
+  const id = generateRandomId();
 
-  createTodo(todoName)
+  storageAddTodo(id, todoName)
+  createTodo(id, todoName)
   toggleModal();
   newTodoInput.value = '';
 }
