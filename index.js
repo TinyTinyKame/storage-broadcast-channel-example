@@ -6,6 +6,16 @@ const todoList = document.getElementsByClassName('todo-list')[0];
 const newTodoInput = document.getElementById('new-todo-name');
 const deleteTodos = document.getElementsByClassName('delete-todo');
 
+for (const deleteTodo of deleteTodos) {
+  deleteTodo.addEventListener('click', removeTodo);
+}
+addButton.addEventListener('click', toggleModal);
+modal.addEventListener('click', toggleModal);
+modalContainer.addEventListener('click', function (ev) {
+  ev.stopPropagation();
+});
+modalAddButton.addEventListener('click', addTodo);
+
 function generateRandomId() {
   return (Math.random() + 1).toString(36).substring(7);
 }
@@ -27,14 +37,6 @@ function removeTodo(ev) {
 
   target.removeEventListener('click', removeTodo);
   target.parentElement.remove();
-}
-
-function addTodo() {
-  const todoName = newTodoInput.value;
-
-  createTodo(todoName)
-  toggleModal();
-  newTodoInput.value = '';
 }
 
 function createTodo(todoName) {
@@ -66,12 +68,10 @@ function createTodo(todoName) {
   todoList.appendChild(todo);
 }
 
-for (const deleteTodo of deleteTodos) {
-  deleteTodo.addEventListener('click', removeTodo);
+function addTodo() {
+  const todoName = newTodoInput.value;
+
+  createTodo(todoName)
+  toggleModal();
+  newTodoInput.value = '';
 }
-addButton.addEventListener('click', toggleModal);
-modal.addEventListener('click', toggleModal);
-modalContainer.addEventListener('click', function (ev) {
-  ev.stopPropagation();
-});
-modalAddButton.addEventListener('click', addTodo);
