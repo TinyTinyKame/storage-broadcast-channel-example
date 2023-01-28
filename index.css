@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400&family=Montserrat:wght@700&display=swap');
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  3. Allow percentage-based heights in the application
+*/
+html, body {
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+:root {
+  --grey: #E8ECF2;
+  --primary-opacity-25: #91e4ef40;
+  --text-color: #3A3A3A;
+  --title-font: "Montserrat", serif;
+  --text-font: "Crimson Text", serif;
+  --primary-color: #03D3EC;
+  --secondary-color: #FFBE00;
+  --black-opacity: #000000A0;
+}
+
+body {
+  font-family: var(--text-font);
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--grey);
+}
+
+.todo-container {
+  padding: 1.5rem 2rem;
+  background-color: white;
+  border-radius: .5rem;
+  width: 25rem;
+}
+
+.todo-title {
+  font-family: var(--title-font);
+  width: 100%;
+}
+
+.todo-tabs {
+  position: relative;
+  border-bottom: 1px solid var(--grey);
+  padding: .5rem 0;
+}
+
+.todo-bottom-border {
+  height: .25rem;
+  width: 5rem;
+  background-color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  transition: left .3s ease-out;
+}
+
+.tab-button {
+  width: 5rem;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  transition: color .3s ease-out;
+  font-weight: 600;
+}
+
+.tab-button:hover,
+.tab-button.selected {
+  color: var(--primary-color);
+}
+
+.tab-button#all.selected + .todo-bottom-border {
+  left: 0;
+}
+
+.tab-button#done.selected + .todo-bottom-border {
+  left: 5rem;
+}
+
+.todo-list {
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  height: 15rem;
+  overflow: scroll;
+}
+
+.todo {
+  padding: 0 1rem;
+  transition: background-color .2s ease-out;
+}
+
+.todo:hover {
+  background-color: var(--primary-opacity-25);
+}
+
+.todo input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.todo input[type="checkbox"] + label {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 1rem;
+  padding: 0.5rem 0;
+}
+
+.todo input[type="checkbox"] + label:after {
+  content: "";
+  width: .75rem;
+  height: .75rem;
+  border: .075rem solid var(--text-color);
+  transform: rotate(45deg);
+  transition: background-color .2s ease-out;
+}
+
+.todo input[type="checkbox"]:checked + label:after {
+  background-color: var(--secondary-color);
+}
+
+.add-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20rem;
+  height: 3rem;
+  width: 3rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  line-height: 1.35;
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+  margin-top: -1.5rem;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--black-opacity);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  box-shadow: .75rem .35rem 3rem black;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title {
+  font-family: var(--title-font);
+  font-size: 1.6rem;
+  width: 100%;
+}
+
+.modal-content {
+  padding: 1rem 0 2rem;
+  display: flex;
+  flex-flow: column;
+}
+
+.modal-content label {
+  font-weight: 600;
+}
+
+.modal-add-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20rem;
+  height: 3rem;
+  width: 3rem;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  line-height: 1.35;
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+  cursor: pointer;
+}
