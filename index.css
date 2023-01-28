@@ -139,12 +139,29 @@ body {
 }
 
 .todo {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   padding: 0 1rem;
   transition: background-color .2s ease-out;
 }
 
 .todo:hover {
   background-color: var(--primary-opacity-25);
+}
+
+.todo .delete-todo {
+  padding: 0;
+  margin-right: .5rem;
+  transform: rotate(45deg);
+  font-weight: 600;
+  background-color: transparent;
+  border: none;
+}
+
+.todo div {
+  flex: 1 1 auto;
 }
 
 .todo input[type="checkbox"] {
@@ -158,7 +175,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-right: 1rem;
-  padding: 0.5rem 0;
+  padding: .5rem 0;
 }
 
 .todo input[type="checkbox"] + label:after {
@@ -168,6 +185,7 @@ body {
   border: .075rem solid var(--text-color);
   transform: rotate(45deg);
   transition: background-color .2s ease-out;
+  flex: 0 0 auto;
 }
 
 .todo input[type="checkbox"]:checked + label:after {
@@ -201,10 +219,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 1;
+  transition: opacity .1s ease-out;
 }
 
 .modal.hidden {
-  display: none;
+  opacity: 0;
+}
+
+.modal.behind {
+  z-index: -1;
 }
 
 .modal-container {
