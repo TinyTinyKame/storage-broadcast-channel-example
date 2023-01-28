@@ -6,7 +6,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="index.css">
-    <script src="index.js" async></script>
+    <script type="module" src="javascripts/addTodoElement.js" async></script>
+    <script type="module" src="javascripts/createTodoElement.js" async></script>
+    <script type="module" src="javascripts/generateRandomId.js" async></script>
+    <script type="module" src="javascripts/removeTodoElement.js" async></script>
+    <script type="module" src="javascripts/toggleModal.js" async></script>
+    <script type="module" src="index.js" async></script>
   </head>
   <body>
     <div class="modal hidden behind">
@@ -27,8 +32,8 @@
         </h1>
 
         <div class="todo-tabs">
-          <button type="button" class="tab-button" id="all">All</button>
-          <button type="button" class="tab-button selected" id="done">Done</button>
+          <button type="button" class="tab-button selected" id="all">All</button>
+          <button type="button" class="tab-button" id="done">Done</button>
           <div class="todo-bottom-border"></div>
         </div>
 
