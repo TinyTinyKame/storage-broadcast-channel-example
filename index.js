@@ -43,6 +43,10 @@ function removeTodo(ev) {
   const input = target.nextElementSibling?.firstChild;
   const todoId = input?.id;
 
+  channel.sendMessage({
+    type: MESSAGE_TYPES.removeTodo,
+    todoId,
+  });
   input.removeEventListener('change', changeTodoState);
   storageDeleteTodo(todoId);
   target.removeEventListener('click', removeTodo);
@@ -52,10 +56,17 @@ function removeTodo(ev) {
 function changeTodoState(ev) {
   const target = ev.target;
   const tabState = storageGetTabState();
+  const todoName = target.nextElementSibling.innerHTML;
 
   storageChangeTodoState(target.id, target.checked);
+  channel.sendMessage({
+    type: MESSAGE_TYPES.updateTodo,
+    todoId: target.id,
+    todoName,
+    todoState: target.checked ? TODO_STATES.done : TODO_STATES.ongoing
+  });
 
-  if (!tabState || tabState !== 'all') {
+  if (!tabState || tabState !== 'ALL') {
     updateTodos();
   }
 }
@@ -75,7 +86,7 @@ function createTodo(todoId, todoName, todoState) {
   input.type = 'checkbox';
   input.id = todoId;
   input.name = todoId;
-  input.checked = todoState === 'done';
+  input.checked = todoState === TODO_STATES.done;
   input.addEventListener('change', changeTodoState);
   const label = document.createElement('label');
   label.htmlFor = todoId;
@@ -94,7 +105,7 @@ function createTodoFromStorage() {
   const state = storageGetTabState();
 
   for (const todo of todos) {
-    if (todo.state === state || state === 'all' || !state) {
+    if (todo.state === state || state === 'ALL' || !state) {
       setTimeout(() => createTodo(todo.id, todo.name, todo.state), 0);
     }
   }
@@ -104,8 +115,13 @@ function addTodo() {
   const todoName = newTodoInput.value;
   const id = generateRandomId();
 
-  storageAddTodo(id, todoName)
-  createTodo(id, todoName)
+  storageAddTodo(id, todoName);
+  createTodo(id, todoName);
+  channel.sendMessage({
+    type: MESSAGE_TYPES.addTodo,
+    todoId: id,
+    todoName,
+  });
   toggleModal();
   newTodoInput.value = '';
 }
@@ -133,7 +149,7 @@ function setSelectedTab() {
   const tabState = storageGetTabState();
 
   for (const tabButton of tabButtons) {
-    if (tabButton.id === tabState || (!tabState && tabButton.id === 'all')) {
+    if (tabButton.id === tabState || (!tabState && tabButton.id === 'ALL')) {
       tabButton.classList.add('selected');
     } else {
       tabButton.classList.remove('selected');

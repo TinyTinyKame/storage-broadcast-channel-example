@@ -1,41 +1,39 @@
+const TODO_STATES = {
+  ongoing: 'ONGOING',
+  done: 'DONE',
+};
+
+
 function storageAddTodo(todoId, todoName) {
   const todos = storageGetTodos();
-  const todo = { id: todoId, name: todoName, state: 'ongoing' };
+  const todo = { id: todoId, name: todoName, state: TODO_STATES.ongoing };
 
-  if (todos.length) {
-    todos.push(todo);
+  todos.push(todo);
 
-    localStorage.todos = JSON.stringify(todos);
-  } else {
-    localStorage.todos = JSON.stringify([todo]);
-  }
+  localStorage.todos = JSON.stringify(todos);
 }
 
 function storageDeleteTodo(todoId) {
   const todos = storageGetTodos();
 
-  if (todos.length) {
-    const index = todos.findIndex(todo => todo.id === todoId);
+  const index = todos.findIndex(todo => todo.id === todoId);
 
-    if (index >= 0) {
-      const newTodos = todos.slice(index, 1);
+  if (index >= 0) {
+    todos.splice(index, 1);
 
-      localStorage.todos = JSON.stringify(newTodos);
-    }
+    localStorage.todos = JSON.stringify(todos);
   }
 }
 
 function storageChangeTodoState(todoId, done) {
   const todos = storageGetTodos();
 
-  if (todos.length) {
-    const index = todos.findIndex(todo => todo.id === todoId);
+  const index = todos.findIndex(todo => todo.id === todoId);
 
-    if (index >= 0) {
-      todos[index].state = !!done ? 'done' : 'ongoing';
+  if (index >= 0) {
+    todos[index].state = !!done ? TODO_STATES.done : TODO_STATES.ongoing;
 
-      localStorage.todos = JSON.stringify(todos);
-    }
+    localStorage.todos = JSON.stringify(todos);
   }
 }
 

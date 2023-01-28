@@ -125,15 +125,15 @@ body {
   color: var(--primary-color);
 }
 
-.tab-button#all.selected ~ .todo-bottom-border {
+.tab-button#ALL.selected ~ .todo-bottom-border {
   left: 0;
 }
 
-.tab-button#ongoing.selected ~ .todo-bottom-border {
+.tab-button#ONGOING.selected ~ .todo-bottom-border {
   left: var(--tab-width);
 }
 
-.tab-button#done.selected ~ .todo-bottom-border {
+.tab-button#DONE.selected ~ .todo-bottom-border {
   left: calc(var(--tab-width) * 2);
 }
 
