@@ -1,4 +1,8 @@
-const MESSAGE_TYPES = {
+import { storageGetTabState } from "./tabs.js";
+import { TODO_STATES } from "./todos.js";
+import createTodoElement from "./javascripts/createTodoElement.js";
+
+export const MESSAGE_TYPES = {
   addTodo: "ADD_TODO",
   removeTodo: "REMOVE_TODO",
   updateTodo: "UPDATE_TODO",
@@ -25,7 +29,7 @@ class TabCommunication {
           break;
         case MESSAGE_TYPES.addTodo:
           if (tabState === 'ALL' || tabState === TODO_STATES.ongoing) {
-            createTodo(todoId, todoName);
+            createTodoElement(todoId, todoName);
           }
 
           break;
@@ -34,7 +38,7 @@ class TabCommunication {
             case TODO_STATES.ongoing:
             case TODO_STATES.done:
               if (todoState === tabState) {
-                createTodo(todoId, todoName);
+                createTodoElement(todoId, todoName);
 
                 break;
               } else if (!!todoIdInput) {
@@ -65,4 +69,4 @@ class TabCommunication {
   }
 }
 
-const channel = new TabCommunication();
+export default new TabCommunication();

@@ -1,19 +1,20 @@
-const TODO_STATES = {
+export const TODO_STATES = {
   ongoing: 'ONGOING',
   done: 'DONE',
 };
 
 
-function storageAddTodo(todoId, todoName) {
+export function storageAddTodo(todoId, todoName) {
   const todos = storageGetTodos();
   const todo = { id: todoId, name: todoName, state: TODO_STATES.ongoing };
 
   todos.push(todo);
 
   localStorage.todos = JSON.stringify(todos);
+  console.log(localStorage)
 }
 
-function storageDeleteTodo(todoId) {
+export function storageDeleteTodo(todoId) {
   const todos = storageGetTodos();
 
   const index = todos.findIndex(todo => todo.id === todoId);
@@ -25,7 +26,7 @@ function storageDeleteTodo(todoId) {
   }
 }
 
-function storageChangeTodoState(todoId, done) {
+export function storageChangeTodoState(todoId, done) {
   const todos = storageGetTodos();
 
   const index = todos.findIndex(todo => todo.id === todoId);
@@ -37,7 +38,7 @@ function storageChangeTodoState(todoId, done) {
   }
 }
 
-function storageGetTodos() {
+export function storageGetTodos() {
   const todos = localStorage.todos;
 
   if (!!todos) {

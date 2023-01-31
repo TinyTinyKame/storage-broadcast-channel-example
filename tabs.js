@@ -1,7 +1,7 @@
-function storageChangeTabState(state) {
+export function storageChangeTabState(state) {
   sessionStorage.tabState = state;
 }
 
-function storageGetTabState() {
+export function storageGetTabState() {
   return sessionStorage.tabState;
 }
