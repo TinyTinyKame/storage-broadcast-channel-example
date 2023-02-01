@@ -18,9 +18,9 @@ export function storageDeleteTodo(todoId) {
     const index = todos.findIndex(todo => todo.id === todoId);
 
     if (index >= 0) {
-      const newTodos = todos.slice(index, 1);
+      todos.splice(index, 1);
 
-      localStorage.todos = JSON.stringify(newTodos);
+      localStorage.todos = JSON.stringify(todos);
     }
   }
 }
