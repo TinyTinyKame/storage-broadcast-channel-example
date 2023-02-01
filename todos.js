@@ -40,7 +40,7 @@ export function storageChangeTodoState(todoId, done) {
 }
 
 export function storageGetTodos() {
-  const todos = localStorage.todos;
+  const todos = localStorage.getItem('todos');
 
   if (!!todos) {
     return JSON.parse(todos);
