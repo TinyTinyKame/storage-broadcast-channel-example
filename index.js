@@ -1,6 +1,8 @@
 import addTodoElement from "./javascripts/addTodoElement.js";
+import changeTabState from "./javascripts/changeTabState.js";
 import createTodoFromStorage from "./javascripts/createTodoFromStorage.js";
 import removeTodoElement from "./javascripts/removeTodoElement.js";
+import setSelectedTab from "./javascripts/setSelectedTab.js";
 import toggleModal from "./javascripts/toggleModal.js";
 
 const addButton = document.getElementsByClassName('add-button')[0];

@@ -1,4 +1,5 @@
 import { storageChangeTodoState } from "../todos.js";
+import { storageGetTabState } from "../tabs.js";
 import updateTodos from "./updateTodos.js";
 
 export default function changeTodoState(ev) {
