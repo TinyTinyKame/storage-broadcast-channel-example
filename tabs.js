@@ -1,7 +1,7 @@
 export function storageChangeTabState(state) {
-  sessionStorage.tabState = state;
+  sessionStorage.setTime('tabState', state);
 }
 
 export function storageGetTabState() {
-  return sessionStorage.tabState;
+  return sessionStorage.getItem('tabState');
 }

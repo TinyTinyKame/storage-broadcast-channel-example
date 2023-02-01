@@ -9,7 +9,7 @@ export function storageAddTodo(todoId, todoName) {
 
   todos.push(todo);
 
-  localStorage.todos = JSON.stringify(todos);
+  localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 export function storageDeleteTodo(todoId) {
@@ -20,7 +20,7 @@ export function storageDeleteTodo(todoId) {
   if (index >= 0) {
     todos.splice(index, 1);
 
-    localStorage.todos = JSON.stringify(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
   }
 }
 
@@ -32,12 +32,12 @@ export function storageChangeTodoState(todoId, done) {
   if (index >= 0) {
     todos[index].state = !!done ? TODO_STATES.done : TODO_STATES.ongoing;
 
-    localStorage.todos = JSON.stringify(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
   }
 }
 
 export function storageGetTodos() {
-  const todos = localStorage.todos;
+  const todos = localStorage.getItem('todos');
 
   if (!!todos) {
     return JSON.parse(todos);
