@@ -1,4 +1,4 @@
-function storageAddTodo(todoId, todoName) {
+export function storageAddTodo(todoId, todoName) {
   const todos = storageGetTodos();
   const todo = { id: todoId, name: todoName, state: 'ongoing' };
 
@@ -11,7 +11,7 @@ function storageAddTodo(todoId, todoName) {
   }
 }
 
-function storageDeleteTodo(todoId) {
+export function storageDeleteTodo(todoId) {
   const todos = storageGetTodos();
 
   if (todos.length) {
@@ -25,7 +25,7 @@ function storageDeleteTodo(todoId) {
   }
 }
 
-function storageChangeTodoState(todoId, done) {
+export function storageChangeTodoState(todoId, done) {
   const todos = storageGetTodos();
 
   if (todos.length) {
@@ -39,7 +39,7 @@ function storageChangeTodoState(todoId, done) {
   }
 }
 
-function storageGetTodos() {
+export function storageGetTodos() {
   const todos = localStorage.todos;
 
   if (!!todos) {
