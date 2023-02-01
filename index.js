@@ -21,6 +21,7 @@ modalContainer.addEventListener('click', function (ev) {
   ev.stopPropagation();
 });
 modalAddButton.addEventListener('click', addTodoElement);
+
 for (const tabButton of tabButtons) {
   tabButton.addEventListener('click', changeTabState);
 }

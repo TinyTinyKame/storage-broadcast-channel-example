@@ -3,7 +3,6 @@ export const TODO_STATES = {
   done: 'DONE',
 };
 
-
 export function storageAddTodo(todoId, todoName) {
   const todos = storageGetTodos();
   const todo = { id: todoId, name: todoName, state: TODO_STATES.ongoing };
@@ -11,7 +10,6 @@ export function storageAddTodo(todoId, todoName) {
   todos.push(todo);
 
   localStorage.todos = JSON.stringify(todos);
-  console.log(localStorage)
 }
 
 export function storageDeleteTodo(todoId) {
